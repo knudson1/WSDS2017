@@ -1,0 +1,13 @@
+\name{wisdom-package}
+\alias{wisdom-package}
+\alias{wisdom}
+\docType{package}
+\title{\packageTitle{wisdom}}
+\description{\packageDescription{wisdom}}
+\details{
+\packageDESCRIPTION{wisdom}
+\packageIndices{wisdom}
+}
+\author{\packageAuthor{wisdom}
+\packageMaintainer{wisdom}}
+\examples{}

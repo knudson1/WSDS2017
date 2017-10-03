@@ -1,0 +1,10 @@
+Package: wisdom
+Type: Package
+Title: This package mPowers women in statistics and data science
+Version: 1.0
+Date: 2017-10-02
+Author: Lindsey Dietz, Christina Knudson, and Haema Nilakanta
+Maintainer: Christina Knudson <cknudson05@gmail.com>
+Description: An example to demonstrate building a package
+License: GPL(>=2)
+Suggests: testthat
