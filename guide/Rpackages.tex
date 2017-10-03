@@ -1,16 +1,66 @@
-\documentclass[12pt]{report}
-\usepackage{amsmath,amsfonts,graphics,epsfig,float,geometry}
-\geometry{top=1in,bottom=1in,left=1in,right=1in}
+\documentclass{article}
+
+\usepackage{amsthm,amsmath,amssymb,indentfirst,float}
+\usepackage{verbatim}
+\usepackage[sort,longnamesfirst]{natbib}
+\newcommand{\pcite}[1]{\citeauthor{#1}'s \citeyearpar{#1}}
+\newcommand{\ncite}[1]{\citeauthor{#1}, \citeyear{#1}}
+
+\usepackage{geometry}
+%\geometry{hmargin=1.025in,vmargin={1.25in,2.5in},nohead,footskip=0.5in} 
+%\geometry{hmargin=1.025in,vmargin={1.25in,0.75in},nohead,footskip=0.5in} 
+\geometry{hmargin=2.5cm,vmargin={2.5cm,2.5cm},nohead,footskip=0.5in}
+
+\renewcommand{\baselinestretch}{1.25}
+
+\usepackage{amsbsy,amsmath,amsthm,amssymb,graphicx}
+
+\setlength{\baselineskip}{0.3in} \setlength{\parskip}{.05in}
+
+
+\newcommand{\gbar}{\bar g}
+\newcommand{\cvgindist}{\overset{\text{d}}{\longrightarrow}}
+\DeclareMathOperator{\PR}{Pr} \DeclareMathOperator{\var}{Var}
+\DeclareMathOperator{\cov}{Cov}
+\newcommand{\eps}{\epsilon}
+\newtheorem{claim}{Claim}
+
+\newcommand{\sX}{{\mathsf X}}
+\newcommand{\tQ}{\tilde Q}
+\newcommand{\cU}{{\cal U}}
+\newcommand{\cX}{{\cal X}}
+\newcommand{\tbeta}{\tilde{\beta}}
+\newcommand{\tlambda}{\tilde{\lambda}}
+\newcommand{\txi}{\tilde{\xi}}
+
+
+
+\def\baro{\vskip  .2truecm\hfill \hrule height.5pt \vskip  .2truecm}
+\def\barba{\vskip -.1truecm\hfill \hrule height.5pt \vskip .4truecm}
+
+\title{An Introduction to Developing R Packages} 
+
+\author{Women in Statistics and Data Science, 2017}
 
 \begin{document}
-\noindent { Lindsey Dietz, Ph.D  \hfill Christina Knudson, Ph.D. \hfill Haema Nilakanta, M.S.  }\\\ 
+\maketitle{}
 
-\begin{center}
-\textbf{An Introduction to Developing R Packages} \\
+\noindent{  Lindsey Dietz, Ph.D. \hfill  Christina Knudson, Ph.D. \hfill  Haema Nilakanta, M.S.}
 
 
-Women in Statistics and Data Science, 2017
-\end{center}
+
+
+
+
+\section{Before Starting}
+\subsection{Design Doc}
+\subsection{Version Control}
+
+\section{Creating the Package}
+\subsection{R Files}
+\subsection{Documentation}
+\subsection{Description}
+\subsection{Tests}
 
 
 
