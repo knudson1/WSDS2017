@@ -12,7 +12,14 @@ all.equal(answer1, 8)
 # all.equal is more useful when you are checking two vectors for equality
 
 # let's do some more checks and put all.equal to better use
-x1 <- 1:25
+x1 <- -25:25
 answer2a <- mPower(x1, 2)
 answer2b <- x1^2
 all.equal(answer2a, answer2b)
+
+# let's check it works for calculating roots 
+avec <- 1:10
+mvec <- 1/avec
+answer3a <- mPower(5, mvec)
+answer3b <- 5^mvec 
+all.equal(answer3a, answer3b)

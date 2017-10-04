@@ -45,7 +45,8 @@
 \begin{document}
 \maketitle{}
 
-\noindent{  Lindsey Dietz, Ph.D. \hfill  Christina Knudson, Ph.D. \hfill  Haema Nilakanta, M.S.}
+\noindent{Christina Knudson, Ph.D. \hfill   Lindsey Dietz, Ph.D. \hfill   Haema Nilakanta, M.S.}\\
+\noindent{University of St. Thomas \hfill  Minnesota Federal Reserve \hfill   University of Minnesota}
 
 
 
@@ -54,24 +55,72 @@
 
 \section{Before Starting}
 \subsection{Design Doc}
+Before you even touch your computer, you must  have a clear vision of your project. This vision and all its details go into a design document. Ideally, once your design document is ready, it will be so thorough that you will only think about programming according to that document and you will not need to think about statistics or data science anymore. The design document is essential for long-term projects so that you can communicate with your future self. A design document is also essential if you are working on a team. This will ensure that if one person writes  function A and another  writes a function that calls function A,  this can happen seamlessly with no mismatching function arguments.\\
+
+First, decide exactly what you want your package to do. Be precise. For example, will your package perform logistic regression for only the logit link or will it also do probit?\\
+
+
+
+
+
+Carefully plan out each function that you will include in your package. For each function,
+\begin{itemize}
+\item write down all equations that function relies on.
+\item decide the inputs and outputs, as well as the properties of each. For example, will the input be a matrix, vector, or scalar?
+\item write pseudocode  and try to imagine if there is anything tricky you need to consider. 
+\item decide whether it will be available to the user or not. For example, the function might simply be called by other functions. 
+\end{itemize}
+
+Next, brainstorm how to test your function to ensure it is doing what you think it is doing. You want to test your code every step of the way. The specific tests you use will depend on the goals and functions of your package. As an example, if you are calculating the value of a function and its first and second derivatives, you can use the method of finite differences to check that the derivatives are in the right neighborhood. 
+
+
 \subsection{Version Control}
 
 \section{Creating the Package}
-\subsection{R Files}
+When you inspect the \texttt{wisdom} folder, you will find three folders (\texttt{tests}, \texttt{R}, and \texttt{man}) and two files (\texttt{DESCRIPTION} and \texttt{NAMESPACE}). 
+
+\subsection{R Files} 
+
 \subsection{Documentation}
+Each function that you export (make available to users) must be documented. The package skeleton ...
 \subsection{Description}
-\subsection{Tests}
+\subsection{Namespace} List all functions in the package that you want to make available to users.
+\subsection{Tests} Ensuring that your package does what you think it does is essential. You have written your functions generally, but you can test the functions by comparing them against specific examples. In the wisdom package, we wrote \texttt{mPower} to calculate $x^m$ for any $x$ and any $m$. To check that it is calculating these powers correctly, we choose a few specific examples and check the \texttt{mPower} results against the results we calculate ourselves.\\
+
+ When you write these tests, try to think creatively. It is easy to imagine testing the square of a positive number. What other values of $x$ and $m$ might someone enter? They can enter any real $x$, so we test $x < 0$. Additionally, the easiest power to imagine is integer $m$, but we do not require that $m$ is an integer. The test in the \texttt{wisdom} package also checks  the function for a few values of $m$ between 0 and 1.
 
 
 
+\section{Checking the Package}
+When you are satisfied with your code, documentation, description file, and namespace file, it is time to build and check the R package. The first step is to create a ``tarball,'' a compressed version of your package. To do this, navigate to the parent directory of your R package and type the following:
+\begin{verbatim}
+R CMD build wisdom
+\end{verbatim}
+The time needed to build your package will increase as you add functions and tests to your package. Next, you will check your package by checking the tarball you have created. Type
+\begin{verbatim}
+R CMD check wisdom.1.0.tar.gz
+\end{verbatim} 
+to check your package. The number in the tarball name will depend on the version number of your package. If you create version 2.0, you will update your description file and your new tarball will be \texttt{wisdom.2.0.tar.gz}. 
+
+\section{Additional Considerations}
+\subsection{Submitting to CRAN} If you intend to submit your package to CRAN, you will need to alter your check slightly to meet CRAN's specifications. Build your tarball as usual and check it with the following:
+\begin{verbatim}
+R CMD check wisdom.1.0.tar.gz --as-cran
+\end{verbatim}
+When your package check returns no errors, check your package on other platforms. For example, you can use WinBuilder to check your package on the Windows platform. Once you are confident your package produces no errors, you may upload the tarball to CRAN. Do not upload a package that cannot pass \texttt{R CMD check}!
 
 
+\subsection{Computational Stability}
+Before programming, it is wise to  look at each equation in your design document and consider the computational stability. For example, the log likelihood is much more stable than the likelihood itself. As another example, the variance calculation
+\begin{align*}
+\dfrac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2 
+\end{align*}
+is much more stable than the variance calculation
+\begin{align*}
+\left[ \dfrac{1}{n}  \sum_{i=1}^n x_i^2 \right] - \left[\bar{x} \right]^2 .
+\end{align*}
 
-
-
-
-
-
+\subsection{Other Stuff?}
 
 
 \end{document}
