@@ -13,13 +13,15 @@ mPower(x, m)
   \item{m}{power to which the base is raised}
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+ If necessary, add more details here. For example, you might want to explain some of the methodology underlying your package.
+
+This command returns a single value. You can also return multiple items. Simply list the items in a similar manner to the arguments section.
 }
 \value{
 Returns x^m
 }
 \references{
-%% ~put references to the literature/web site here ~
+This package is basic enough that we do not need references. Hopefully your package will be more sophisticated! Put references to the literature/web site here ~
 }
 \author{
 \itemize{
@@ -28,7 +30,7 @@ Returns x^m
 \item Haema Nilakanta, University of Minnesota 
 }}
 \note{
-%%  ~~further notes~~
+If you have additional notes, you can add them in this section.
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~

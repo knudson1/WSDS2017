@@ -1,10 +1,10 @@
 Package: wisdom
 Type: Package
-Title: This package mPowers women in statistics and data science
+Title: mPowering women in statistics and data science to develop R packages
 Version: 1.0
 Date: 2017-10-02
 Author: Lindsey Dietz, Christina Knudson, and Haema Nilakanta
 Maintainer: Christina Knudson <knud8583@stthomas.edu>
-Description: An example to demonstrate building a package
+Description: This package serves an  example to demonstrate building R packages and was built for the Women in Statistics and Data Science conference.
 License: GPL(>=2)
 Suggests: testthat
