@@ -1,5 +1,7 @@
 \documentclass{article}
 
+\usepackage{hyperref}
+
 \usepackage{amsthm,amsmath,amssymb,indentfirst,float}
 \usepackage{verbatim}
 \usepackage[sort,longnamesfirst]{natbib}
@@ -46,35 +48,35 @@
 \maketitle{}
 
 \noindent{Christina Knudson, Ph.D. \hfill   Lindsey Dietz, Ph.D. \hfill   Haema Nilakanta, M.S.}\\
-\noindent{University of St. Thomas \hfill  Minnesota Federal Reserve \hfill   University of Minnesota}
+\noindent{University of St. Thomas \hfill  Minnesota Federal Reserve \hfill   University of Minnesota} \\ \\ 
 
 
 
-
+We have  produced the R package \href{https://github.com/knudson1/WSDS2017}{wisdom} as our contribution to the Women in Statistics and Data Science conference. A small minority of R packages on CRAN are maintained by women. We hope this document can help guide women through some basic steps of R package production. 
 
 
 \section{Before Starting}
+
+
+
+
 \subsection{Design Doc}
-Before you even touch your computer, you must  have a clear vision of your project. This vision and all its details go into a design document. Ideally, once your design document is ready, it will be so thorough that you will only think about programming according to that document and you will not need to think about statistics or data science anymore. The design document is essential for long-term projects so that you can communicate with your future self. A design document is also essential if you are working on a team. This will ensure that if one person writes  function A and another  writes a function that calls function A,  this can happen seamlessly with no mismatching function arguments.\\
+Before you even touch your computer, develop a clear vision of your project. Put this vision and all the nitty gritty details  into a ``design document.'' The design document is the document you will refer to every time you sit down to program your package. Ideally,  your design document  will be so thorough that you will only think about programming according to that document and you will not need to think about statistics or data science anymore. The design document is essential for long-term projects so that you can communicate to your future self. A design document is also essential if you are working on a team: it will ensure that one function can call another seamlessly and with no mismatching arguments, even if the functions are written by different people.
 
-First, decide exactly what you want your package to do. Be precise. For example, will your package perform logistic regression for only the logit link or will it also do probit?\\
-
-
-
-
-
-Carefully plan out each function that you will include in your package. For each function,
+A design document should have an overview of the purpose of the package as well as all the details. Decide exactly what you want your package to do. Then, carefully plan out each function that you will include in your package. For each function,
 \begin{itemize}
 \item write down all equations that function relies on.
 \item decide the inputs and outputs, as well as the properties of each. For example, will the input be a matrix, vector, or scalar?
+\item decide whether you will provide any defaults for the arguments. If you do, decide what the defaults will be.
 \item write pseudocode  and try to imagine if there is anything tricky you need to consider. 
-\item decide whether it will be available to the user or not. For example, the function might simply be called by other functions. 
+\item decide whether it will be available to the user or not. You might write helper functions that will be called by other functions. Users might not see these helper functions, and you will not need to write documentation for them later.
 \end{itemize}
 
-Next, brainstorm how to test your function to ensure it is doing what you think it is doing. You want to test your code every step of the way. The specific tests you use will depend on the goals and functions of your package. As an example, if you are calculating the value of a function and its first and second derivatives, you can use the method of finite differences to check that the derivatives are in the right neighborhood. 
+We also highly recommend you brainstorm tests and include these in the design document. You want to test your code every step of the way to ensure every command and function is doing what you think it is doing. Testing both small chunks of code and entire functions will help you isolate bugs or other mistakes. The specific tests you use will depend on the goals and functions of your package. As an example, if you are calculating the value of a function and its first and second derivatives, you can use the method of finite differences to check that the derivatives are in the right neighborhood. 
 
 
 \subsection{Version Control}
+We highly recommend you use version control while you work. This will help you track your changes and revert to previous versions of your project. Some methods of version control also make collaboration smoother. Our preferred method of version control is git. Free public Github accounts are available for your remote repository.
 
 \section{Creating the Package}
 When you inspect the \texttt{wisdom} folder, you will find three folders (\texttt{tests}, \texttt{R}, and \texttt{man}) and two files (\texttt{DESCRIPTION} and \texttt{NAMESPACE}). 
@@ -98,9 +100,9 @@ R CMD build wisdom
 \end{verbatim}
 The time needed to build your package will increase as you add functions and tests to your package. Next, you will check your package by checking the tarball you have created. Type
 \begin{verbatim}
-R CMD check wisdom.1.0.tar.gz
+R CMD check wisdom_1.0.tar.gz 
 \end{verbatim} 
-to check your package. The number in the tarball name will depend on the version number of your package. If you create version 2.0, you will update your description file and your new tarball will be \texttt{wisdom.2.0.tar.gz}. 
+to check your package. The number in the tarball name will depend on the version number of your package. The \texttt{wisdom} package is version 1.0, as the description file shows, so the tarball name includes 1.0. 
 
 \section{Additional Considerations}
 \subsection{Submitting to CRAN} If you intend to submit your package to CRAN, you will need to alter your check slightly to meet CRAN's specifications. Build your tarball as usual and check it with the following:
@@ -119,6 +121,9 @@ is much more stable than the variance calculation
 \begin{align*}
 \left[ \dfrac{1}{n}  \sum_{i=1}^n x_i^2 \right] - \left[\bar{x} \right]^2 .
 \end{align*}
+
+\subsection{Licenses}
+
 
 \subsection{Other Stuff?}
 
