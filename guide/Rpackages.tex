@@ -53,7 +53,7 @@
 
 
 
-We have  produced this guide and the R package \href{https://github.com/knudson1/WSDS2017}{wisdom} as our contribution to the Women in Statistics and Data Science conference. We hope to help guide women through the basic steps of R package production so that  women's R functions can be packaged neatly and shared easily. The electronic (pdf) version of this guide with  hyperlinks can be found at \href{https://github.com/knudson1/WSDS2017/blob/master/guide/Rpackages.pdf}{\url{https://github.com/knudson1/WSDS2017}}.
+We have  produced this guide and the R package \href{https://github.com/knudson1/WSDS2017}{wisdom} as our contribution to the Women in Statistics and Data Science conference. We hope to help guide women through the basic steps of R package production so that  women's R functions can be packaged neatly and shared easily. The R package wisdom and the electronic (pdf) version of this guide with  hyperlinks can be found at \href{https://github.com/knudson1/WSDS2017}{\url{https://github.com/knudson1/WSDS2017}}. 
 
 
 \section{Before Starting}
@@ -103,22 +103,31 @@ import(glmm)
 
 For a basic package, this is all you need to know about namespaces. If you are more advanced (e.g. writing S3 or S4 methods, calling C from R), you can find more details on the namespace file at  \href{https://cran.r-project.org/doc/manuals/R-exts.html#Package-namespaces}{Writing R Extensions.}
 
-\subsection{Tests} Ensuring that your package does what you think it does is essential. You have written your functions generally, but you can test the functions by comparing them against specific examples. In the wisdom package, we wrote \texttt{mPower} to calculate $x^m$ for any $x$ and any $m$. To check that it is calculating these powers correctly, we choose a few specific examples and check the \texttt{mPower} results against the results we calculate ourselves.\\
+\subsection{Tests} Ensuring that your package does what you think it does is essential. You have written your functions generally, but you can test the functions by comparing them against specific examples. When you check your package (\texttt{R CMD check}), the tests will run and the results will be  \texttt{R CMD check} output and log file.\\
 
- When you write these tests, try to think creatively. It is easy to imagine testing the square of a positive number. What other values of $x$ and $m$ might someone enter? They can enter any real $x$, so we test $x < 0$. Additionally, the easiest power to imagine is integer $m$, but we do not require that $m$ is an integer. The test in the \texttt{wisdom} package also checks  the function for a few values of $m$ between 0 and 1.
+ The \texttt{all.equal} function is useful for ensuring two numbers (or vectors) are equal. The test file in \texttt{wisdom} demonstrates the use of \texttt{all.equal}. To check that the \texttt{mPower} function is calculating  powers correctly, we choose a few specific examples and check the \texttt{mPower} results against the results we calculate ourselves.\\
+
+ When you write these tests, try to think creatively. It is easy to imagine testing the square of a positive number. What other values of $x$ and $m$ might someone enter? They can enter any real $x$, so we test $x < 0$. Additionally, the easiest power to imagine is integer $m$, but we do not require that $m$ is an integer. The test in the \texttt{wisdom} package also checks  the function for a few values of $m$ between 0 and 1.\\
 
 
 
-\section{Checking the Package}
+
+
+
+
+
+\section{Building, Checking, and Installing the Package}
 When you are satisfied with your code, documentation, description file, and namespace file, it is time to build and check the R package. The first step is to create a ``tarball,'' a compressed version of your package. To do this, navigate to the parent directory of your R package and type the following:
 \begin{verbatim}
 R CMD build wisdom
 \end{verbatim}
-The time needed to build your package will increase as you add functions and tests to your package. Next, you will check your package by checking the tarball you have created. Type
+The time needed to build your package will increase as you add functions and tests to your package.  The tarball produced will contain the version number listed in your package's description file.  The \texttt{wisdom} package is version 1.0, as the description file shows, so the tarball name includes 1.0. \\
+
+Next, you will check your package by checking the tarball you have created. Type
 \begin{verbatim}
 R CMD check wisdom_1.0.tar.gz 
 \end{verbatim} 
-to check your package. The number in the tarball name will depend on the version number of your package. The \texttt{wisdom} package is version 1.0, as the description file shows, so the tarball name includes 1.0. 
+to check your package. 
 
 \section{Additional Considerations}
 
@@ -164,6 +173,13 @@ Another license, the \href{https://cran.r-project.org/web/licenses/GPL-2}{GPL-2 
 
 \subsection{Vignettes}
 Every R package produces a manual, but the helpfulness of the manual is limited due to the layout of the manual. Functions are listed in alphabetical order rather than the order a user might use them in. A vignette is a document that walks the user through one or more examples to demonstrate how to use the package. An example of a vignette can be found on \href{cknudson.com}{\url{cknudson.com}} or at  \href{https://cran.r-project.org/web/packages/glmm/vignettes/intro.pdf}{\url{https://cran.r-project.org/web/packages/glmm/vignettes/intro.pdf}}.
+
+\subsubsection{Another Note on Tests}
+If your package uses random numbers (e.g. Monte Carlo), you must make sure you use the same random numbers in your function's calculation and in your check. In your R code, you can create an option to  keep track of the random numbers used in your function. You can then use those same random numbers when you write a test for your function. See \href{https://github.com/knudson1/glmm/blob/master2/glmm/R/glmm.R}{R package glmm's glmm.R function} as an example of optionally outputting the random numbers used. (The random numbers are referred to as \texttt{u.star}). The section \texttt{objfunNOC} in \href{https://github.com/knudson1/glmm/blob/master2/glmm/tests/objfunTest.R}{R package glmm's test file objfunTest.R} demonstrates  using the stored random numbers \texttt{u.star}) to check the package's original R function.\\
+
+If your package calculates derivatives, you can approximate the derivative using finite differences. If the finite difference is not similar to the derivative calculated by your package, you know that either your function or its derivative is calculated incorrectly.  \\
+
+If your package calls C, C++, or Fortran from R, you should check that the C/C++/Fortran code is producing what you think it should be producing. First code the function in R, since R is much easier than C/C++/Fortran. If the R output does not match the C output, you know you have a problem.
 
 
 \end{document}
