@@ -77,33 +77,78 @@ We also highly recommend you brainstorm tests and include these in the design do
 
 
 \subsection{Version Control}
-We highly recommend you use version control while you work. This will help you track your changes and revert to previous versions of your project. Some methods of version control also make collaboration smoother. Our preferred method of version control is git. Free public \href{https://github.com}{Github} accounts are available for your remote repository.
+We highly recommend you use version control while you work. This will help you track your changes and revert to previous versions of your project. Some methods of version control also make collaboration smoother. Our preferred method of version control is git.  Free public \href{https://github.com}{Github} accounts are available for your remote repository.
 
 \section{Creating the Package}
-When you inspect the \texttt{wisdom} folder, you will find three folders (\texttt{tests}, \texttt{R}, and \texttt{man}) and two files (\texttt{DESCRIPTION} and \texttt{NAMESPACE}). 
+Write your R function(s). When your function(s) are ready, use the command \texttt{package.skeleton} to create the folders and files for your package. The first argument is  the name of your package. The second argument is a vector containing the names of all the R functions you have prepared. Each name should be in quotation marks. To create the \texttt{wisdom} package with the \texttt{mPower} function, we type
+\begin{verbatim}
+package.skeleton( name = "wisdom" , list = c("mPower"))
+\end{verbatim}
+If we had created a second function \texttt{morefun}, we would have typed
+\begin{verbatim}
+package.skeleton( name = "wisdom" , list = c("mPower", "morefun"))
+\end{verbatim}
+Running the above \texttt{package.skeleton} command  creates a folder named \texttt{wisdom}. In other words, the folder will match the package name.
+Within this folder are two folders (\texttt{R} and \texttt{man}) and two files (\texttt{DESCRIPTION} and \texttt{NAMESPACE}). We describe these files and folders below.
+
+If you inspect the \texttt{wisdom} package available on Github, you will see an additional folder (\texttt{tests}), which we added ourselves after running  \texttt{package.skeleton}. Section \ref{sec:tests} covers the \texttt{tests} folder.
 
 \subsection{R Files} 
+The \texttt{R} folder created by  \texttt{package.skeleton} will contain a .R file for each function you listed in   \texttt{package.skeleton}. If you wish to edit your package's R code, edit these files. If you wish to add additional R functions after running  \texttt{package.skeleton}, you certainly can: simply add the function in a .R file to this folder, add the corresponding documentation in the \texttt{man} folder, and edit the namespace file to export the function.
 
 \subsection{Documentation}
-Each function that you export (make available to users) must be documented. The package skeleton ...
+The \texttt{man} folder created by  \texttt{package.skeleton} will contain a .Rd file for each function and for the package as a whole.  The purpose of these files is to store the information that will help users learn how to use your function(s). This is the documentation that pops up when a user types \texttt{?mPower} in the R console. Each function that you export (i.e. make available to users) must be documented. You can delete .Rd files for functions you will not export (e.g. helper functions).  \\
+
+It is your job to open and complete each of these  .Rd files. This process is fairly straightforward. You can look at other packages'  documentation if you are uncertain (although some packages have terrible documentation!). \\
+
+If you add an R function to your package after running \texttt{package.skeleton}, make sure to add the corresponding .Rd file.
+
+
 \subsection{Description}
+The description file created by  \texttt{package.skeleton} looks like this:
+\begin{verbatim}
+Package: YourPackage
+Type: Package
+Title: What the package does (short line)
+Version: 1.0
+Date: 2017-10-13
+Author: Who wrote it
+Maintainer: Who to complain to <yourfault@somewhere.net>
+Description: More about what it does (maybe more than one line)
+License: What license is it under?
+\end{verbatim}
+It is your job to open this file and complete it. In particular, you need to add the title, the author (you!), the maintainer and the maintainer's email address (probably also you), a description of the package, and the license you have chosen for your package. You can find a little bit of information on licenses in section \ref{sec:lic} and a lot of information on the \href{https://cran.r-project.org/doc/manuals/R-exts.html#Licensing}{Writing R Extensions site}. \\
+
+We also recommend adding the following line in the description file:
+\begin{verbatim}
+ByteCompile: TRUE
+\end{verbatim}
+This compiles your code so that it can run faster each time the function is called. This makes package installation take slightly longer. However, a package only needs to be installed once (unless the package is updated) while functions are often used many times, so the compilation is probably worth the upfront cost.\\
+
+If/when you update your package, be sure to edit the version number and date in the description file. \\ 
+
+For a basic package, this is all you need to know about the description file. If you are more advanced (e.g. including vignettes), you can find more details on the namespace file at  \href{https://cran.r-project.org/doc/manuals/R-exts.html#The-DESCRIPTION-file}{Writing R Extensions.}
+
+
 \subsection{Namespace} In your namespace file, use  \texttt{export} and list the function(s) in the package that you want to make available to users. This is necessary to make your function(s) available to users. The  \texttt{wisdom} package has the most basic namespace possible, as it exports a single function, as shown below.
 
 \begin{verbatim}
 export(mPower)
 \end{verbatim}
 
-If your package calls any other packages, you must \texttt{import} that package by listing it in the namespace. In the example namespace below, the function depends on R package \texttt{glmm} and so it imports it.
+If your package relies on any other packages, you must \texttt{import} that package by listing it in the namespace. In the example namespace below, the function depends on R packages \texttt{glmm} and \texttt{trust} and so it imports them.
 
 \begin{verbatim}
 export(mPower)
 
 import(glmm)
+import(trust)
 \end{verbatim}
 
 For a basic package, this is all you need to know about namespaces. If you are more advanced (e.g. writing S3 or S4 methods, calling C from R), you can find more details on the namespace file at  \href{https://cran.r-project.org/doc/manuals/R-exts.html#Package-namespaces}{Writing R Extensions.}
 
-\subsection{Tests} Ensuring that your package does what you think it does is essential. You have written your functions generally, but you can test the functions by comparing them against specific examples. When you check your package (\texttt{R CMD check}), the tests will run and the results will be  \texttt{R CMD check} output and log file.\\
+\subsection{Tests}\label{sec:tests} Ensuring that your package does what you think it does is essential. We highly recommend creating a \texttt{tests} folder. In this folder, create .R files that test your code. 
+You have written your functions generally, but you can test the functions by comparing them against specific examples. When you check your package (\texttt{R CMD check}), the tests will run and the results will be  \texttt{R CMD check} output and log file.\\
 
  The \texttt{all.equal} function is useful for ensuring two numbers (or vectors) are equal. The test file in \texttt{wisdom} demonstrates the use of \texttt{all.equal}. To check that the \texttt{mPower} function is calculating  powers correctly, we choose a few specific examples and check the \texttt{mPower} results against the results we calculate ourselves.\\
 
@@ -169,7 +214,7 @@ R CMD check wisdom.1.0.tar.gz --as-cran
 When your package check returns no errors, check your package on other platforms. For example, you can use WinBuilder to check your package on the Windows platform. Once you are confident your package produces no errors, you may upload the tarball to CRAN. Do not upload a package that cannot pass \texttt{R CMD check}!
 
 
-\subsection{Licenses}
+\subsection{Licenses}\label{sec:lic}
 You may choose from a variety of licenses. On one end of the spectrum is the \href{https://cran.r-project.org/web/licenses/MIT}{``MIT'' license.} If you select this license, anyone can take any/all of your code to produce software, which they can then sell. The \href{https://cran.r-project.org/web/packages/aster/index.html}{aster} package uses this license. \\
 
 Another license, the \href{https://cran.r-project.org/web/licenses/GPL-2}{GPL-2 license}, allows others to copy your code but requires any copy-cats to provide users with the same rights and freedoms the copy-cat received from your  work. That  is, the copy-cat cannot choose a license that is more restrictive than your own. The \href{https://cran.r-project.org/web/packages/glmm/index.html}{glmm} package uses this license. The author selected the license because she wanted others to be able to use her code and ideas, but did not want others to profit off it.  
