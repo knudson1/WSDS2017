@@ -42,18 +42,18 @@
 
 \title{An Introduction to Developing R Packages} 
 
-\author{Women in Statistics and Data Science, 2017}
+\author{Women in Statistics and Data Science}
 \date{October 20, 2017}
 
 \begin{document}
 \maketitle{}
 
 \noindent{Christina Knudson, Ph.D. \hfill   Lindsey Dietz, Ph.D. \hfill   Haema Nilakanta}\\
-\noindent{University of St. Thomas \hfill   Federal Reserve of Minnesota \hfill   University of Minnesota} \\ \\ 
+\noindent{University of Saint Thomas \hfill   Federal Reserve Bank of Minneapolis \hfill   University of Minnesota} \\ \\ 
 
 
 
-We have  produced this guide and the R package \href{https://github.com/knudson1/WSDS2017}{wisdom} as our contribution to the Women in Statistics and Data Science conference. We hope to help guide women through the basic steps of R package production so that  women's R functions can be packaged neatly and shared easily. The R package wisdom and the electronic (pdf) version of this guide with  hyperlinks can be found at \href{https://github.com/knudson1/WSDS2017}{\url{https://github.com/knudson1/WSDS2017}}. 
+We have  produced this guide and the R package \href{https://github.com/knudson1/WSDS2017}{wisdom} as our contribution to the Women in Statistics and Data Science conference. We hope to help guide women through the basic steps of R package production so that  women's R functions can be packaged neatly and shared easily. The R package \texttt{wisdom} and the electronic (pdf) version of this guide with  hyperlinks can be found at \href{https://github.com/knudson1/WSDS2017}{\url{https://github.com/knudson1/WSDS2017}}. 
 
 
 \section{Before Starting}
@@ -93,15 +93,7 @@ Within this folder are two folders (\texttt{R} and \texttt{man}) and two files (
 
 If you inspect the \texttt{wisdom} package available on Github, you will see an additional folder (\texttt{tests}), which we added ourselves after running  \texttt{package.skeleton}. Section \ref{sec:tests} covers the \texttt{tests} folder.
 
-\subsection{R Files} 
-The \texttt{R} folder created by  \texttt{package.skeleton} will contain a .R file for each function you listed in   \texttt{package.skeleton}. If you wish to edit your package's R code, edit these files. If you wish to add additional R functions after running  \texttt{package.skeleton}, you certainly can: simply add the function in a .R file to this folder, add the corresponding documentation in the \texttt{man} folder, and edit the namespace file to export the function.
 
-\subsection{Documentation}
-The \texttt{man} folder created by  \texttt{package.skeleton} will contain a .Rd file for each function and for the package as a whole.  The purpose of these files is to store the information that will help users learn how to use your function(s). This is the documentation that pops up when a user types \texttt{?mPower} in the R console. Each function that you export (i.e. make available to users) must be documented. You can delete .Rd files for functions you will not export (e.g. helper functions).  \\
-
-It is your job to open and complete each of these  .Rd files. This process is fairly straightforward. You can look at other packages'  documentation if you are uncertain (although some packages have terrible documentation!). \\
-
-If you add an R function to your package after running \texttt{package.skeleton}, make sure to add the corresponding .Rd file.
 
 
 \subsection{Description}
@@ -146,6 +138,17 @@ import(trust)
 \end{verbatim}
 
 For a basic package, this is all you need to know about namespaces. If you are more advanced (e.g. writing S3 or S4 methods, calling C from R), you can find more details on the namespace file at  \href{https://cran.r-project.org/doc/manuals/R-exts.html#Package-namespaces}{Writing R Extensions.}
+
+\subsection{R Files} 
+The \texttt{R} folder created by  \texttt{package.skeleton} will contain a .R file for each function you listed in   \texttt{package.skeleton}. If you wish to edit your package's R code, edit these files. If you wish to add additional R functions after running  \texttt{package.skeleton}, you certainly can: simply add the function in a .R file to this folder, add the corresponding documentation in the \texttt{man} folder, and edit the namespace file to export the function.
+
+\subsection{Documentation}
+The \texttt{man} folder created by  \texttt{package.skeleton} will contain a .Rd file for each function and for the package as a whole.  The purpose of these files is to store the information that will help users learn how to use your function(s). This is the documentation that pops up when a user types \texttt{?mPower} in the R console. Each function that you export (i.e. make available to users) must be documented. You can delete .Rd files for functions you will not export (e.g. helper functions).  \\
+
+It is your job to open and complete each of these  .Rd files. This process is fairly straightforward. You can look at other packages'  documentation if you are uncertain (although some packages have terrible documentation!). \\
+
+If you add an R function to your package after running \texttt{package.skeleton}, make sure to add the corresponding .Rd file.
+
 
 \subsection{Tests}\label{sec:tests} Ensuring that your package does what you think it does is essential. We highly recommend creating a \texttt{tests} folder. In this folder, create .R files that test your code. 
 You have written your functions generally, but you can test the functions by comparing them against specific examples. When you check your package (\texttt{R CMD check}), the tests will run and the results will be  \texttt{R CMD check} output and log file.\\
@@ -215,20 +218,28 @@ When your package check returns no errors, check your package on other platforms
 
 
 \subsection{Licenses}\label{sec:lic}
-You may choose from a variety of licenses. On one end of the spectrum is the \href{https://cran.r-project.org/web/licenses/MIT}{``MIT'' license.} If you select this license, anyone can take any/all of your code to produce software, which they can then sell. The \href{https://cran.r-project.org/web/packages/aster/index.html}{aster} package uses this license. \\
+You may choose from a variety of licenses. The \href{https://cran.r-project.org/doc/manuals/R-exts.html#Licensing}{Writing R Extensions site} provides information to help you select an appropriate license. \\ 
 
-Another license, the \href{https://cran.r-project.org/web/licenses/GPL-2}{GPL-2 license}, allows others to copy your code but requires any copy-cats to provide users with the same rights and freedoms the copy-cat received from your  work. That  is, the copy-cat cannot choose a license that is more restrictive than your own. The \href{https://cran.r-project.org/web/packages/glmm/index.html}{glmm} package uses this license. The author selected the license because she wanted others to be able to use her code and ideas, but did not want others to profit off it.  
+On one end of the spectrum is the \href{https://cran.r-project.org/web/licenses/MIT}{MIT license.} If you select this license, anyone can take any/all of your code to produce software, which they can then sell. The \href{https://cran.r-project.org/web/packages/aster/index.html}{\texttt{aster}} package uses this license. \\
+
+Another license, the \href{https://cran.r-project.org/web/licenses/GPL-2}{GPL-2 license}, allows others to copy your code but requires any copy-cats to provide users with the same rights and freedoms the copy-cat received from your  work. That  is, the copy-cat cannot choose a license that is more restrictive than your own. The \href{https://cran.r-project.org/web/packages/glmm/index.html}{\texttt{glmm}} package uses this license. The author selected the license because she wanted others to be able to use her code and ideas, but did not want others to profit off it.  
 
 
 \subsection{Vignettes}
 Every R package produces a manual, but the helpfulness of the manual is limited due to the layout of the manual. Functions are listed in alphabetical order rather than the order a user might use them in. A vignette is a document that walks the user through one or more examples to demonstrate how to use the package. An example of a vignette can be found on \href{cknudson.com}{\url{cknudson.com}} or at  \href{https://cran.r-project.org/web/packages/glmm/vignettes/intro.pdf}{\url{https://cran.r-project.org/web/packages/glmm/vignettes/intro.pdf}}.
 
-\subsubsection{Another Note on Tests}
-If your package uses random numbers (e.g. Monte Carlo), you must make sure you use the same random numbers in your function's calculation and in your check. In your R code, you can create an option to  keep track of the random numbers used in your function. You can then use those same random numbers when you write a test for your function. See \href{https://github.com/knudson1/glmm/blob/master2/glmm/R/glmm.R}{R package glmm's glmm.R function} as an example of optionally outputting the random numbers used. (The random numbers are referred to as \texttt{u.star}). The section \texttt{objfunNOC} in \href{https://github.com/knudson1/glmm/blob/master2/glmm/tests/objfunTest.R}{R package glmm's test file objfunTest.R} demonstrates  using the stored random numbers \texttt{u.star}) to check the package's original R function.\\
+\subsection{Another Note on Tests}
+If your package uses random numbers (e.g. Monte Carlo), you must make sure you use the same random numbers in your function's calculation and in your check. In your R code, you can create an option to  keep track of the random numbers used in your function. You can then use those same random numbers when you write a test for your function. See \href{https://github.com/knudson1/glmm/blob/master2/glmm/R/glmm.R}{R package \texttt{glmm}'s glmm.R function} as an example of optionally outputting the random numbers used. (The random numbers are referred to as \texttt{u.star}). The section \texttt{objfunNOC} in \href{https://github.com/knudson1/glmm/blob/master2/glmm/tests/objfunTest.R}{R package \texttt{glmm}'s test file objfunTest.R} demonstrates  using the stored random numbers \texttt{u.star}) to check the package's original R function.\\
 
 If your package calculates derivatives, you can approximate the derivative using finite differences. If the finite difference is not similar to the derivative calculated by your package, you know that either your function or its derivative is calculated incorrectly.  \\
 
 If your package calls C, C++, or Fortran from R, you should check that the C/C++/Fortran code is producing what you think it should be producing. First code the function in R, since R is much easier than C/C++/Fortran. If the R output does not match the C output, you know you have a problem.
 
+\subsection{Useful Links}
+\noindent \href{https://cran.r-project.org/doc/manuals/r-release/R-exts.html}{Writing R Extensions: \url{https://cran.r-project.org/doc/manuals/r-release/R-exts.html}}\\
+
+\noindent \href{https://github.com/knudson1/WSDS2017/tree/master/guide}{PDF version of guide: \url{https://github.com/knudson1/WSDS2017/tree/master/guide}}\\
+
+\noindent \href{https://github.com/knudson1/WSDS2017/tree/master/wisdom}{ R package \texttt{wisdom}: \url{https://github.com/knudson1/WSDS2017/tree/master/wisdom}}
 
 \end{document}
